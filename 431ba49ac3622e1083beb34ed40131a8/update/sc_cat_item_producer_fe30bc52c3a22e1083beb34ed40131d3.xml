@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sc_cat_item_producer">
+    <sc_cat_item_producer action="INSERT_OR_UPDATE">
+        <access_type>restricted</access_type>
+        <active>true</active>
+        <allow_edit>false</allow_edit>
+        <availability>on_both</availability>
+        <billable>false</billable>
+        <can_cancel>true</can_cancel>
+        <category display_value="Can We Help You?">e15706fc0a0a0aa7007fc21e1ab70c2f</category>
+        <checked_out/>
+        <cost>0</cost>
+        <custom_cart/>
+        <delivery_plan display_value="DEFAULT">523da512c611228900811a37c97c2014</delivery_plan>
+        <delivery_plan_script/>
+        <delivery_time>1970-01-03 00:00:00</delivery_time>
+        <description><![CDATA[<p style="margin: 0px;"><span style="font-family: arial,helvetica,sans-serif; font-size: medium;">ITSM Proctice : </span></p>
+<p style="margin: 0px;"><span style="font-family: arial,helvetica,sans-serif; font-size: medium;">Request assistance with an issue you are having. An incident record will be created and managed through to successful resolution. You will also be notified of progress.</span></p>]]></description>
+        <display_price_property>non_zero</display_price_property>
+        <entitlement_script/>
+        <flow_designer_flow/>
+        <fulfillment_automation_level>unspecified</fulfillment_automation_level>
+        <group/>
+        <hide_sp>false</hide_sp>
+        <icon/>
+        <ignore_price>true</ignore_price>
+        <image/>
+        <list_price>0</list_price>
+        <location/>
+        <make_item_non_conversational>false</make_item_non_conversational>
+        <mandatory_attachment>false</mandatory_attachment>
+        <meta/>
+        <mobile_hide_price>false</mobile_hide_price>
+        <mobile_picture/>
+        <mobile_picture_type>use_mobile_picture</mobile_picture_type>
+        <model/>
+        <name>Create Incident ITSM </name>
+        <no_attachment_v2>false</no_attachment_v2>
+        <no_cart>false</no_cart>
+        <no_cart_v2>false</no_cart_v2>
+        <no_delivery_time_v2>false</no_delivery_time_v2>
+        <no_order>false</no_order>
+        <no_order_now>false</no_order_now>
+        <no_proceed_checkout>false</no_proceed_checkout>
+        <no_quantity>false</no_quantity>
+        <no_quantity_v2>false</no_quantity_v2>
+        <no_save_as_draft>false</no_save_as_draft>
+        <no_search>false</no_search>
+        <no_wishlist_v2>false</no_wishlist_v2>
+        <omit_price>false</omit_price>
+        <order>200</order>
+        <ordered_item_link/>
+        <owner display_value="System Administrator">6816f79cc0a8016401c5a33be04be441</owner>
+        <picture/>
+        <post_insert_script><![CDATA[/**
+* This script is executed after the record is generated. 
+* `current` Is the GlideRecord produced by Record Producer. Use `current.update()` to update the record
+* To access the variables, use `producer.var1` where var1 is the name of the variable
+* To access the Record Producer use `cat_item`
+*/]]></post_insert_script>
+        <preview>JavaScript: popupOpenStandard("com.glideapp.servicecatalog_cat_item_view.do?v=1&amp;sysparm_id=fe30bc52c3a22e1083beb34ed40131d3&amp;sysparm_preview=true", "summary");</preview>
+        <price>0</price>
+        <published_ref/>
+        <recurring_frequency/>
+        <recurring_price>0</recurring_price>
+        <redirect_url>generated_record</redirect_url>
+        <request_method/>
+        <roles>snc_internal</roles>
+        <save_options/>
+        <save_script><![CDATA[/**
+* This script is executed at every step save in Catalog Builder. 
+* This script is executed before `Script` is executed.
+* `current` Is the GlideRecord produced by Record Producer. 
+* To access the variables, use `producer.var1` where var1 is the name of the variable
+* To access the Record Producer use `cat_item`
+*/]]></save_script>
+        <sc_catalogs>e0d08b13c3330100c8b837659bba8fb4</sc_catalogs>
+        <sc_ic_item_staging/>
+        <sc_ic_version/>
+        <sc_template/>
+        <script><![CDATA[var isMobile = GlideMobileExtensions.getDeviceType() == 'm';
+var link = isMobile ? '#/!list/incident/q:active=true%5Ecaller_id=javascript:gs.user_id()%5EEQ' : 'home.do';
+
+var linkLbl = isMobile ? "List" : "Homepage";
+var br = '<br/>';
+var linkURL = '<a href="' + link + '">' + gs.getMessage(linkLbl) + '</a>';
+var msgArgs = [br, linkURL];
+
+var info = gs.getMessage("This incident was opened on your behalf{0}The IT department will contact you if they need any further information{0}You can track status from this {1} {0}", msgArgs);
+
+gs.addInfoMessage(info);
+var caller = gs.getUserID();
+var parent_table = RP.getParameterValue('sysparm_parent_table');
+if (JSUtil.notNil(parent_table)) {
+	var parent_map = new GlideRecord('request_parent_mapping');
+	parent_map.addQuery('parent_table', parent_table);
+	parent_map.query();
+	if (parent_map.next())
+		var requested_for_field = parent_map.getValue('requested_for_field');
+	var parentGR = new GlideRecord(parent_table);
+	parentGR.addQuery('sys_id', RP.getParameterValue('sysparm_parent_sys_id'));
+	parentGR.query();
+	if (parentGR.next())
+		caller = parentGR.getValue(requested_for_field);
+}
+current.contact_type = 'self-service';
+current.caller_id = caller;
+var prodCommentStr = producer.comments + "";
+if (prodCommentStr.length > 80)
+	current.short_description = prodCommentStr.substring(0, 80);
+else
+	current.short_description = prodCommentStr;
+current.description = prodCommentStr;
+
+var incRPUtil = new LinkRecordProducerToIncident();
+incRPUtil.linkRecordProducerToParentIncident(RP.getParameterValue('sysparm_parent_sys_id'), current);
+
+]]></script>
+        <short_description>ITSM Proctice : Create an Incident record to report and request assistance with an issue you are having</short_description>
+        <show_variable_help_on_load>false</show_variable_help_on_load>
+        <start_closed>false</start_closed>
+        <state/>
+        <sys_class_name>sc_cat_item_producer</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-07-07 06:44:01</sys_created_on>
+        <sys_id>fe30bc52c3a22e1083beb34ed40131d3</sys_id>
+        <sys_mod_count>14</sys_mod_count>
+        <sys_name>Create Incident ITSM </sys_name>
+        <sys_package display_value="Service Catalog core applications" source="com.glideapp.servicecatalog">fd3a5e8f659012104f340572a947400d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ITSM Practice">431ba49ac3622e1083beb34ed40131a8</sys_scope>
+        <sys_update_name>sc_cat_item_producer_fe30bc52c3a22e1083beb34ed40131d3</sys_update_name>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2025-07-07 07:13:38</sys_updated_on>
+        <table_name>incident</table_name>
+        <taxonomy_topic display_value="Technology services">06d3df67c3053010069aec4b7d40dd70</taxonomy_topic>
+        <template/>
+        <template_manager_roles/>
+        <type>item</type>
+        <use_sc_layout>true</use_sc_layout>
+        <vendor/>
+        <version>14</version>
+        <view>ess</view>
+        <visible_bundle>true</visible_bundle>
+        <visible_guide>true</visible_guide>
+        <visible_standalone>true</visible_standalone>
+        <workflow/>
+    </sc_cat_item_producer>
+    <sys_translated_text action="delete_multiple" query="documentkey=fe30bc52c3a22e1083beb34ed40131d3"/>
+    <fx_price action="delete_multiple" query="id=fe30bc52c3a22e1083beb34ed40131d3"/>
+    <fx_price action="INSERT_OR_UPDATE">
+        <amount>0</amount>
+        <currency display_value="USD">USD</currency>
+        <field>price</field>
+        <id>fe30bc52c3a22e1083beb34ed40131d3</id>
+        <parent/>
+        <reference_amount>0</reference_amount>
+        <reference_currency display_value="USD">USD</reference_currency>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-07-07 06:44:01</sys_created_on>
+        <sys_id>cb30bc92c3a22e1083beb34ed401311d</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-07-07 06:44:03</sys_updated_on>
+        <table>sc_cat_item_producer</table>
+        <type>calculated</type>
+    </fx_price>
+    <fx_price action="INSERT_OR_UPDATE">
+        <amount>0</amount>
+        <currency display_value="USD">USD</currency>
+        <field>recurring_price</field>
+        <id>fe30bc52c3a22e1083beb34ed40131d3</id>
+        <parent/>
+        <reference_amount>0</reference_amount>
+        <reference_currency display_value="USD">USD</reference_currency>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-07-07 06:44:01</sys_created_on>
+        <sys_id>c330bc92c3a22e1083beb34ed401311f</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-07-07 06:44:03</sys_updated_on>
+        <table>sc_cat_item_producer</table>
+        <type>calculated</type>
+    </fx_price>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>fe30bc52c3a22e1083beb34ed40131d3</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-07-07 06:44:56</sys_created_on>
+        <sys_id>50703892c3a22e1083beb34ed40131ae</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-07-07 06:44:56</sys_updated_on>
+        <table>sc_cat_item_producer</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>
