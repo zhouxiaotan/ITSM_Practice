@@ -57,8 +57,8 @@
         <rec_price_if_checked>0</rec_price_if_checked>
         <record/>
         <record_producer_table>incident</record_producer_table>
-        <reference>sc_category</reference>
-        <reference_qual/>
+        <reference>sys_choice</reference>
+        <reference_qual>javascript:'name=incident^element=category^dependent_valueISEMPTY'</reference_qual>
         <reference_qual_condition/>
         <rich_text/>
         <roles_to_use_also_request_for/>
@@ -79,14 +79,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2025-07-07 06:50:17</sys_created_on>
         <sys_id>7471f816c3a22e1083beb34ed40131db</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>12</sys_mod_count>
         <sys_name>Category</sys_name>
         <sys_package display_value="ITSM Practice" source="x_1755511_itsm_pra">431ba49ac3622e1083beb34ed40131a8</sys_package>
         <sys_policy/>
         <sys_scope display_value="ITSM Practice">431ba49ac3622e1083beb34ed40131a8</sys_scope>
         <sys_update_name>item_option_new_7471f816c3a22e1083beb34ed40131db</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2025-07-07 07:04:02</sys_updated_on>
+        <sys_updated_on>2025-07-07 09:04:49</sys_updated_on>
         <table/>
         <tooltip/>
         <topic_block/>
@@ -94,7 +94,7 @@
         <ui_page/>
         <unique>false</unique>
         <use_dynamic_default>false</use_dynamic_default>
-        <use_reference_qualifier>simple</use_reference_qualifier>
+        <use_reference_qualifier>advanced</use_reference_qualifier>
         <validate_regex/>
         <variable_name/>
         <variable_set/>

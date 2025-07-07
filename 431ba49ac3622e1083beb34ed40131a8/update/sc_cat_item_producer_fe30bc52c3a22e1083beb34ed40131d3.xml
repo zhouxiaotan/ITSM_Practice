@@ -77,43 +77,19 @@
         <sc_ic_item_staging/>
         <sc_ic_version/>
         <sc_template/>
-        <script><![CDATA[var isMobile = GlideMobileExtensions.getDeviceType() == 'm';
-var link = isMobile ? '#/!list/incident/q:active=true%5Ecaller_id=javascript:gs.user_id()%5EEQ' : 'home.do';
-
-var linkLbl = isMobile ? "List" : "Homepage";
-var br = '<br/>';
-var linkURL = '<a href="' + link + '">' + gs.getMessage(linkLbl) + '</a>';
-var msgArgs = [br, linkURL];
-
-var info = gs.getMessage("This incident was opened on your behalf{0}The IT department will contact you if they need any further information{0}You can track status from this {1} {0}", msgArgs);
-
-gs.addInfoMessage(info);
-var caller = gs.getUserID();
-var parent_table = RP.getParameterValue('sysparm_parent_table');
-if (JSUtil.notNil(parent_table)) {
-	var parent_map = new GlideRecord('request_parent_mapping');
-	parent_map.addQuery('parent_table', parent_table);
-	parent_map.query();
-	if (parent_map.next())
-		var requested_for_field = parent_map.getValue('requested_for_field');
-	var parentGR = new GlideRecord(parent_table);
-	parentGR.addQuery('sys_id', RP.getParameterValue('sysparm_parent_sys_id'));
-	parentGR.query();
-	if (parentGR.next())
-		caller = parentGR.getValue(requested_for_field);
-}
+        <script><![CDATA[var caller = gs.getUserID();
 current.contact_type = 'self-service';
 current.caller_id = caller;
+// ADD BY ZXT
+current.category = producer.category.value;
+current.subcategory = producer.subcategory.value;
+// END
 var prodCommentStr = producer.comments + "";
 if (prodCommentStr.length > 80)
 	current.short_description = prodCommentStr.substring(0, 80);
 else
 	current.short_description = prodCommentStr;
 current.description = prodCommentStr;
-
-var incRPUtil = new LinkRecordProducerToIncident();
-incRPUtil.linkRecordProducerToParentIncident(RP.getParameterValue('sysparm_parent_sys_id'), current);
-
 ]]></script>
         <short_description>ITSM Proctice : Create an Incident record to report and request assistance with an issue you are having</short_description>
         <show_variable_help_on_load>false</show_variable_help_on_load>
@@ -123,14 +99,14 @@ incRPUtil.linkRecordProducerToParentIncident(RP.getParameterValue('sysparm_paren
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2025-07-07 06:44:01</sys_created_on>
         <sys_id>fe30bc52c3a22e1083beb34ed40131d3</sys_id>
-        <sys_mod_count>14</sys_mod_count>
+        <sys_mod_count>36</sys_mod_count>
         <sys_name>Create Incident ITSM </sys_name>
         <sys_package display_value="Service Catalog core applications" source="com.glideapp.servicecatalog">fd3a5e8f659012104f340572a947400d</sys_package>
         <sys_policy/>
         <sys_scope display_value="ITSM Practice">431ba49ac3622e1083beb34ed40131a8</sys_scope>
         <sys_update_name>sc_cat_item_producer_fe30bc52c3a22e1083beb34ed40131d3</sys_update_name>
-        <sys_updated_by>system</sys_updated_by>
-        <sys_updated_on>2025-07-07 07:13:38</sys_updated_on>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-07-07 09:06:51</sys_updated_on>
         <table_name>incident</table_name>
         <taxonomy_topic display_value="Technology services">06d3df67c3053010069aec4b7d40dd70</taxonomy_topic>
         <template/>
@@ -138,7 +114,7 @@ incRPUtil.linkRecordProducerToParentIncident(RP.getParameterValue('sysparm_paren
         <type>item</type>
         <use_sc_layout>true</use_sc_layout>
         <vendor/>
-        <version>14</version>
+        <version>36</version>
         <view>ess</view>
         <visible_bundle>true</visible_bundle>
         <visible_guide>true</visible_guide>
