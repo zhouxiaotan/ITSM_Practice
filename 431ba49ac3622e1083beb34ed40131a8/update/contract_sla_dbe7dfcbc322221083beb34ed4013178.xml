@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="contract_sla">
+    <contract_sla action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <adv_condition_type>none</adv_condition_type>
+        <cancel_condition/>
+        <collection>ticket</collection>
+        <condition_class/>
+        <duration>1970-01-01 04:00:00</duration>
+        <duration_type/>
+        <enable_logging>false</enable_logging>
+        <flow display_value="ITSM Ticket SLA flow">28aa57b2c3eaee1083beb34ed4013198</flow>
+        <name>ITSMPriority2 Resolution (4 hour)</name>
+        <pause_condition table="ticket">state=-5^EQ<item display_value="Pending" endquery="false" field="state" goto="false" newquery="false" operator="=" or="false" value="-5"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </pause_condition>
+        <relative_duration_works_on>Task record</relative_duration_works_on>
+        <reset_action>cancel</reset_action>
+        <reset_condition/>
+        <resume_condition/>
+        <retroactive>false</retroactive>
+        <retroactive_pause>true</retroactive_pause>
+        <schedule display_value="8-5 weekdays excluding holidays">090eecae0a0a0b260077e1dfa71da828</schedule>
+        <schedule_source>sla_definition</schedule_source>
+        <schedule_source_field/>
+        <set_start_to/>
+        <start_condition table="ticket">priority=2^active=true^EQ<item display_value="2 - High" endquery="false" field="priority" goto="false" newquery="false" operator="=" or="false" value="2"/>
+            <item endquery="false" field="active" goto="false" newquery="false" operator="=" or="false" value="true"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </start_condition>
+        <stop_condition table="ticket">state=3^ORstate=4^ORstate=7^ORactive=false^NQpriority!=2^EQ<item display_value="Closed Complete" endquery="false" field="state" goto="false" newquery="false" operator="=" or="false" value="3"/>
+            <item display_value="Closed Incomplete" endquery="false" field="state" goto="false" newquery="false" operator="=" or="true" value="4"/>
+            <item display_value="Closed Skipped" endquery="false" field="state" goto="false" newquery="false" operator="=" or="true" value="7"/>
+            <item endquery="false" field="active" goto="false" newquery="false" operator="=" or="true" value="false"/>
+            <item display_value="2 - High" endquery="false" field="priority" goto="false" newquery="true" operator="!=" or="false" value="2"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </stop_condition>
+        <sys_class_name>contract_sla</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-07-10 02:55:07</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>dbe7dfcbc322221083beb34ed4013178</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>ITSMPriority2 Resolution (4 hour)</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="ITSM Practice" source="x_1755511_itsm_pra">431ba49ac3622e1083beb34ed40131a8</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="ITSM Practice">431ba49ac3622e1083beb34ed40131a8</sys_scope>
+        <sys_update_name>contract_sla_dbe7dfcbc322221083beb34ed4013178</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-07-10 06:50:40</sys_updated_on>
+        <target>resolution</target>
+        <timezone/>
+        <timezone_source>task.caller_id.time_zone</timezone_source>
+        <type>SLA</type>
+        <vendor/>
+        <when_to_cancel>on_condition</when_to_cancel>
+        <when_to_resume>on_condition</when_to_resume>
+        <workflow/>
+    </contract_sla>
+</record_update>
